@@ -30,7 +30,6 @@ public class WeatherController {
 
 	@FXML
 	void initialize() {
-		// Perform initialization tasks when the FXML is loaded
 	}
 
 	@FXML
@@ -42,7 +41,6 @@ public class WeatherController {
 			// Handle the case where the API key is not provided
 			System.out.println("412d7317b84a83bcfe80cc39870a0515");
 		} else {
-			// Initialize or update the WeatherApp instance with the new API key
 			if (weatherApp == null) {
 				weatherApp = new WeatherApp(apiKey);
 			} else {
@@ -50,7 +48,6 @@ public class WeatherController {
 			}
 
 
-			// Use the weatherApp instance to perform weather-related functionality
 			weatherApp.search(city, temperature, weatherDesc, weatherimg);
 		}
 	}

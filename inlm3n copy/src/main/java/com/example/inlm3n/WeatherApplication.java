@@ -19,5 +19,9 @@ public class WeatherApplication extends Application {
 
     public static void main(String[] args) {
         launch();
+
+        System.out.println("hejsan");
+        System.out.println("12322222");
     }
+
 }
