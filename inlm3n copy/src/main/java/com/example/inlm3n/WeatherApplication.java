@@ -20,8 +20,7 @@ public class WeatherApplication extends Application {
     public static void main(String[] args) {
         launch();
 
-        System.out.println("hejsan");
-        System.out.println("12322222");
+        WeatherApp weatherApp = new WeatherApp("412d7317b84a83bcfe80cc39870a0515");
+        System.out.println(weatherApp.getWeatherData("Malmö"));
     }
-
 }

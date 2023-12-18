@@ -20,6 +20,7 @@ public class WeatherApp {
 	private static final String CLOUD_IMAGE = "/assets/cloud.png";
 	private static final String SNOW_IMAGE = "/assets/snowflake.png";
 	private static final String RAIN_IMAGE = "/assets/heavy-rain.png";
+	// Lägg till en mist png också (glöm inte att lägga den på updateWeatherImage)
 	private String apiKey;
 
 	public WeatherApp(String apiKey) {
@@ -30,12 +31,12 @@ public class WeatherApp {
 		this.apiKey = apiKey;
 	}
 
-	public void search(String city, Label temperatureLabel, Label weatherDescLabel, ImageView weatherimg) {
+	public void search(String city, Label adressLabel, Label temperatureLabel, Label temperatureFeelsLikeLabel, Label weatherDescLabel, ImageView weatherimg) {
 		Task<Void> task = new Task<Void>() {
 			@Override
 			protected Void call() {
 				String weatherData = getWeatherData(city);
-				updateUI(weatherData, temperatureLabel, weatherDescLabel, weatherimg);
+				updateUI(weatherData, adressLabel, temperatureLabel,temperatureFeelsLikeLabel, weatherDescLabel, weatherimg);
 
 				return null;
 			}
@@ -43,9 +44,9 @@ public class WeatherApp {
 		new Thread(task).start();
 	}
 
-	private String getWeatherData(String city) {
+	public String getWeatherData(String city) {
 		try {
-			String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
+			String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=metric";
 			URL url = new URL(apiUrl);
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestMethod("GET");
@@ -67,18 +68,36 @@ public class WeatherApp {
 
 	}
 
-	private void updateUI(String weatherData, Label temperatureLabel, Label weatherDescLabel, ImageView weatherimg) {
+	private void updateUI(String weatherData, Label adressLabbel, Label temperatureLabel, Label temperatureFeelsLikeLabel, Label weatherDescLabel, ImageView weatherimg) {
+
 		int temperatureIndex = weatherData.indexOf("\"temp\":");
 		int temperatureEndIndex = weatherData.indexOf(",", temperatureIndex);
 		String temperatureValueString = weatherData.substring(temperatureIndex + 7, temperatureEndIndex).trim();
 		double temperatureValue = Double.parseDouble(temperatureValueString);
 
+		int temperatureFeelsLikeIndex = weatherData.indexOf("\"feels_like\":");
+		int temperatureFeelsLikeEndIndex = weatherData.indexOf(",", temperatureFeelsLikeIndex);
+		String temperatureFeelsLikeValueString = weatherData.substring(temperatureFeelsLikeIndex + 13, temperatureFeelsLikeEndIndex).trim();
+		double temperatureFeelsLikeValue = Double.parseDouble(temperatureFeelsLikeValueString);
+
 		int weatherDescIndex = weatherData.indexOf("\"description\":\"");
 		int weatherDescEndIndex = weatherData.indexOf("\"", weatherDescIndex + 15);
 		String weatherDescription = weatherData.substring(weatherDescIndex + 15, weatherDescEndIndex).trim();
 
+		int countryIndex = weatherData.indexOf("\"country\":");
+		int countryEndIndex = weatherData.indexOf(",", countryIndex);
+		String countryValueString = weatherData.substring(countryIndex + 11, countryEndIndex).trim();
+		System.out.println(countryValueString);
+
+		int cityIndex = weatherData.indexOf("\"name\":");
+		int cityEndIndex = weatherData.indexOf(",", cityIndex);
+		String cityValueString = weatherData.substring(cityIndex + 8, cityEndIndex).trim();
+		System.out.println(cityValueString);
+
 		Platform.runLater(() -> {
+			adressLabbel.setText("Location: " + cityValueString.replaceAll("\"","") + ", " + countryValueString.replaceAll("\"","") );
 			temperatureLabel.setText("Temperature: " + temperatureValue + "°C");
+			temperatureFeelsLikeLabel.setText("Feels Like: " +Math.round(temperatureFeelsLikeValue) + "°C");
 			weatherDescLabel.setText("Weather: " + weatherDescription);
 
 			// Additional logic to update other UI elements based on the weather data

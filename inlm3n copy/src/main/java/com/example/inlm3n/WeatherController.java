@@ -7,38 +7,30 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
 public class WeatherController {
-
 	@FXML
-	private Label address;
-
+	private Label adress;
 	@FXML
 	private TextField search;
-
-	@FXML
-	private TextField apiKeyTextField;
-
 	@FXML
 	private Label temperature;
-
+	@FXML
+	private Label temperatureFeelsLike;
 	@FXML
 	private Label weatherDesc;
-
 	@FXML
 	private ImageView weatherimg;
-
 	private WeatherApp weatherApp;
-
 	@FXML
 	void initialize() {
 	}
 
 	@FXML
 	void search(ActionEvent event) {
-		String apiKey = apiKeyTextField.getText();
+		String apiKey = "412d7317b84a83bcfe80cc39870a0515";
 		String city = search.getText();
 
 		if (apiKey.isEmpty()) {
-			// Handle the case where the API key is not provided
+			//Handle the case where the API key is not provided
 			System.out.println("412d7317b84a83bcfe80cc39870a0515");
 		} else {
 			if (weatherApp == null) {
@@ -47,8 +39,7 @@ public class WeatherController {
 				weatherApp.updateApiKey(apiKey);
 			}
 
-
-			weatherApp.search(city, temperature, weatherDesc, weatherimg);
+			weatherApp.search(city, adress, temperature, temperatureFeelsLike, weatherDesc, weatherimg);
 		}
 	}
 }
