@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
-public class HelloController {
+public class WeatherController {
 
     @FXML
     private Label address;
@@ -51,7 +51,7 @@ public class HelloController {
 
 
             // Use the weatherApp instance to perform weather-related functionality
-            weatherApp.search(city);
+            weatherApp.search(city, temperature, weatherDesc, weatherimg);
         }
     }
 }

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="69f270e1-a8fa-43ba-97d7-85ce7a10f753" name="Changes" comment="" />
+    <list default="true" id="69f270e1-a8fa-43ba-97d7-85ce7a10f753" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/inlm3n/src/main/java/com/example/inlm3n/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/inlm3n/src/main/java/com/example/inlm3n/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inlm3n/src/main/java/com/example/inlm3n/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/inlm3n/src/main/java/com/example/inlm3n/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inlm3n/src/main/java/com/example/inlm3n/WeatherApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/inlm3n/src/main/java/com/example/inlm3n/WeatherApp.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,9 +17,9 @@
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="2" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2Za4dDoHks2H5qNVMaPQ5MXnT9t" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -25,7 +29,11 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main"
+    "git-widget-placeholder": "main",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "configurable.group.tools"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

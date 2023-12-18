@@ -1,76 +1,57 @@
 package com.example.inlm3n;
 
-import javafx.application.Platform;
-import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
+public class WeatherController {
 
-public class WeatherApp {
-	private String apiKey;
+	@FXML
+	private Label address;
 
-	public WeatherApp(String apiKey) {
-		this.apiKey = apiKey;
+	@FXML
+	private TextField search;
+
+	@FXML
+	private TextField apiKeyTextField;
+
+	@FXML
+	private Label temperature;
+
+	@FXML
+	private Label weatherDesc;
+
+	@FXML
+	private ImageView weatherimg;
+
+	private WeatherApp weatherApp;
+
+	@FXML
+	void initialize() {
+		// Perform initialization tasks when the FXML is loaded
 	}
 
-	public void updateApiKey(String apiKey) {
-		this.apiKey = apiKey;
-	}
-	public void search(String city) {
-		Task<Void> task = new Task<Void>() {
-			@Override
-			protected Void call() {
-				String weatherData = getWeatherData(city);
-				// updateUI(weatherData);
-				return null;
+	@FXML
+	void search(ActionEvent event) {
+		String apiKey = apiKeyTextField.getText();
+		String city = search.getText();
+
+		if (apiKey.isEmpty()) {
+			// Handle the case where the API key is not provided
+			System.out.println("412d7317b84a83bcfe80cc39870a0515");
+		} else {
+			// Initialize or update the WeatherApp instance with the new API key
+			if (weatherApp == null) {
+				weatherApp = new WeatherApp(apiKey);
+			} else {
+				weatherApp.updateApiKey(apiKey);
 			}
-		};
-		new Thread(task).start();
-	}
-	private String getWeatherData(String city){
-		try{
-			String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
-			URL url = new URL(apiUrl);
-			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-			connection.setRequestMethod("GET");
-			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-			StringBuilder response = new StringBuilder();
-			String line;
 
-			while ((line = reader.readLine()) != null){
-				response.append(line);
-			}
-			reader.close();
-			connection.disconnect();
-			return response.toString();
-		} catch (IOException e){
-			e.printStackTrace();
-			showErrorAlert("Error");
-			return null;
+
+			// Use the weatherApp instance to perform weather-related functionality
+			weatherApp.search(city, temperature, weatherDesc, weatherimg);
 		}
-
-	}
-	private void updateUI(String weatherData) {
-		// Ändra så t.ex när de soligt så ska den soliga bilden visas o temperaturen ska ändras osv.
-		// Implement the logic to update the UI elements (labels, images, etc.)
-		// based on the weather data.
-		// Example:
-		// Platform.runLater(() -> {
-		//    temperature.setText("Temperature: " + temperatureValue + "°C");
-		//    weatherDesc.setText("Weather: " + weatherDescription);
-		//    // Update other UI elements as needed
-		// });
-	}
-
-	private void showErrorAlert(String errorMessage) {
-		Platform.runLater(() ->{
-			Alert alert = new Alert(Alert.AlertType.ERROR, errorMessage, ButtonType.OK);
-			alert.showAndWait();
-		});
 	}
 }
