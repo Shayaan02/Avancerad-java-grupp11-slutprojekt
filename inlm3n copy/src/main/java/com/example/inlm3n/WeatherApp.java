@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 
 
 public class WeatherApp {
@@ -36,7 +38,7 @@ public class WeatherApp {
 			@Override
 			protected Void call() {
 				String weatherData = getWeatherData(city);
-				updateUI(weatherData, adressLabel, temperatureLabel,temperatureFeelsLikeLabel, weatherDescLabel, weatherimg);
+				updateUI(weatherData, adressLabel, temperatureLabel, temperatureFeelsLikeLabel, weatherDescLabel, weatherimg);
 
 				return null;
 			}
@@ -95,9 +97,9 @@ public class WeatherApp {
 		System.out.println(cityValueString);
 
 		Platform.runLater(() -> {
-			adressLabbel.setText("Location: " + cityValueString.replaceAll("\"","") + ", " + countryValueString.replaceAll("\"","") );
+			adressLabbel.setText("Location: " + cityValueString.replaceAll("\"", "") + ", " + countryValueString.replaceAll("\"", ""));
 			temperatureLabel.setText("Temperature: " + temperatureValue + "°C");
-			temperatureFeelsLikeLabel.setText("Feels Like: " +Math.round(temperatureFeelsLikeValue) + "°C");
+			temperatureFeelsLikeLabel.setText("Feels Like: " + Math.round(temperatureFeelsLikeValue) + "°C");
 			weatherDescLabel.setText("Weather: " + weatherDescription);
 
 			// Additional logic to update other UI elements based on the weather data
@@ -117,6 +119,8 @@ public class WeatherApp {
 			weatherimg.setImage(new Image(getClass().getResourceAsStream(RAIN_IMAGE)));
 		} else if (weatherCondition.contains("snow")) {
 			weatherimg.setImage(new Image(getClass().getResourceAsStream(SNOW_IMAGE)));
+		} else if (weatherCondition.contains("clear")) {
+			weatherimg.setImage(new Image(getClass().getResourceAsStream(SUNNY_IMAGE)));
 		}
 	}
 
