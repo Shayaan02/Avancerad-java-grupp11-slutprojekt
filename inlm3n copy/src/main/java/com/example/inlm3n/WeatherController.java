@@ -20,9 +20,6 @@ public class WeatherController {
 	@FXML
 	private ImageView weatherimg;
 	private WeatherApp weatherApp;
-	@FXML
-	void initialize() {
-	}
 
 	@FXML
 	void search(ActionEvent event) {
@@ -30,7 +27,6 @@ public class WeatherController {
 		String city = search.getText();
 
 		if (apiKey.isEmpty()) {
-			//Handle the case where the API key is not provided
 			System.out.println("412d7317b84a83bcfe80cc39870a0515");
 		} else {
 			if (weatherApp == null) {

@@ -13,8 +13,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import javafx.scene.Scene;
-import javafx.scene.paint.Color;
 
 
 public class WeatherApp {
@@ -22,6 +20,7 @@ public class WeatherApp {
 	private static final String CLOUD_IMAGE = "/assets/cloud.png";
 	private static final String SNOW_IMAGE = "/assets/snowflake.png";
 	private static final String RAIN_IMAGE = "/assets/heavy-rain.png";
+	private static final String HAZE_IMAGE = "/assets/mist.png";
 	// Lägg till en mist png också (glöm inte att lägga den på updateWeatherImage)
 	private String apiKey;
 
@@ -64,7 +63,7 @@ public class WeatherApp {
 			return response.toString();
 		} catch (IOException e) {
 			e.printStackTrace();
-			showErrorAlert("Error");
+			showErrorAlert("Ange en giltig stad");
 			return null;
 		}
 
@@ -102,8 +101,6 @@ public class WeatherApp {
 			temperatureFeelsLikeLabel.setText("Feels Like: " + Math.round(temperatureFeelsLikeValue) + "°C");
 			weatherDescLabel.setText("Weather: " + weatherDescription);
 
-			// Additional logic to update other UI elements based on the weather data
-			// For example, you might want to change an image based on the weather condition
 			String weatherCondition = weatherDescription.toLowerCase();
 			updateWeatherImage(weatherCondition, weatherimg);
 		});
@@ -121,6 +118,9 @@ public class WeatherApp {
 			weatherimg.setImage(new Image(getClass().getResourceAsStream(SNOW_IMAGE)));
 		} else if (weatherCondition.contains("clear")) {
 			weatherimg.setImage(new Image(getClass().getResourceAsStream(SUNNY_IMAGE)));
+		}
+		else if (weatherCondition.contains("haze")) {
+			weatherimg.setImage(new Image(getClass().getResourceAsStream(HAZE_IMAGE)));
 		}
 	}
 
